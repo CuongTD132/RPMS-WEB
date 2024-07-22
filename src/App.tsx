@@ -6,7 +6,7 @@ import Accounts from "./pages/accounts/Accounts.tsx";
 import Departments from "./pages/Departments.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Account from "./pages/accounts/Account.tsx";
-import { Bounce, ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 import { Counter } from "./pages/Counter.tsx";
 
 const Router = createBrowserRouter([
@@ -31,16 +31,7 @@ function App() {
   return (
     <>
       <RouterProvider router={Router} />
-      <ToastContainer
-        position="top-right"
-        autoClose={1000}
-        hideProgressBar={false}
-        closeOnClick={true}
-        pauseOnHover={false}
-        draggable={true}
-        theme="light"
-        transition={Bounce}
-      />
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 }

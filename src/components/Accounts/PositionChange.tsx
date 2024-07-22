@@ -1,8 +1,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Modal, { ModalHandle } from "../UI/Modal";
 import Button from "../UI/Button";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-hot-toast";
 type PositionChangeProps = {
   onClose: () => void;
   position: string;

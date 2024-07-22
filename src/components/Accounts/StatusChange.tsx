@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import Modal, { ModalHandle } from "../UI/Modal";
 import Button from "../UI/Button";
 
