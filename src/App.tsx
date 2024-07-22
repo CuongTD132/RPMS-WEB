@@ -25,10 +25,6 @@ const Router = createBrowserRouter([
       { path: "counter", element: <Counter /> },
     ],
   },
-  {
-    path: "*",
-    element: <Root />,
-  },
 ]);
 
 function App() {
