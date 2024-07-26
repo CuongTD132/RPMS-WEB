@@ -41,8 +41,8 @@ th {
 .modal {
   width: 90%;
   max-width: 35rem;
-  background-color: #6b5e81;
-  color: #edeaf3;
+  background-color: aliceblue;
+  color: #000;
   border-radius: 8px;
   border: none;
 }

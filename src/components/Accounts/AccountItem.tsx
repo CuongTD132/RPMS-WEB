@@ -1,84 +1,68 @@
 import Button from "../UI/Button";
-import editAccount from "../../assets/edit-profile.svg";
+// import editAccount from "../../assets/edit-profile.svg";
 import banAccount from "../../assets/user-ban.svg";
 import { useState } from "react";
-import PositionChange from "./PositionChange";
+// import PositionChange from "./PositionChange";
 import StatusChange from "./StatusChange";
-type AccountItemProps = {
-  id: string;
-  code: string;
-  email: string;
-  position: string;
-  firstName: string;
-  lastName: string;
-  createdDate: string;
-  status: string;
-};
+import { AccountsProps } from "./AccountsList";
 
 export default function AccountItem({
   id,
   code,
-  createdDate,
   email,
-  firstName,
-  lastName,
-  position,
   status,
-}: AccountItemProps) {
-  const [isChangeRole, SetIsChangeRole] = useState(false);
-  const [isChangeStatus, SetIsChangeStatus] = useState(false);
-  function handleStartChanging() {
-    SetIsChangeRole(true);
-  }
-  function handleCancelChanging() {
-    SetIsChangeRole(false);
-  }
+}: AccountsProps) {
+  // const [isChangeRole, setIsChangeRole] = useState(false);
+  const [isChangeStatus, setIsChangeStatus] = useState(false);
+  // function handleStartChanging() {
+  //   setIsChangeRole(true);
+  // }
+  // function handleCancelChanging() {
+  //   setIsChangeRole(false);
+  // }
   function handleStartChangingStatus() {
-    SetIsChangeStatus(true);
+    setIsChangeStatus(true);
   }
   function handleCancelChangingStatus() {
-    SetIsChangeStatus(false);
+    setIsChangeStatus(false);
   }
   return (
     <>
-      {isChangeRole && (
+      {/* {isChangeRole && ( 
         <PositionChange
           position={position}
-          firstName={firstName}
-          lastName={lastName}
+          // firstName={firstName}
+          // lastName={lastName}
           onClose={handleCancelChanging}
         />
-      )}
+      )} */}
       {isChangeStatus && (
         <StatusChange
           status={status}
-          firstName={firstName}
-          lastName={lastName}
+          email={email}
+          id={id}
           onClose={handleCancelChangingStatus}
         />
       )}
       <td>{code}</td>
       <td>
         <Button className="text-blue-500 hover:text-blue-700" to={id}>
-          {firstName} {lastName}
+          {email}
         </Button>
       </td>
-      <td>{position}</td>
-      <td>{email}</td>
-      <td>{createdDate}</td>
       {status === "Active" ? (
         <td className="text-green-500">{status}</td>
       ) : (
         <td className="text-yellow-500">{status}</td>
       )}
       <td className="w-20 pr-2 space-x-1">
-        <Button
+        {/* <Button
           onClick={handleStartChanging}
           title="Change Role"
           className="border bg-white hover:bg-amber-100 rounded-full p-1"
         >
           <img className="w-5 h-5" src={editAccount} />
-        </Button>
+        </Button> */}
         <Button
           onClick={handleStartChangingStatus}
           title="Ban/Unban Account"

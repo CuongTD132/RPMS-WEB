@@ -8,14 +8,21 @@ import toast from "react-hot-toast";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
-export type dataProps = {
+export type userProps = {
   fullName: string;
   token: string;
 };
-type responseProps = {
+export type dataProps<T> = {
   statuscode: number;
   message: string;
-  data: dataProps;
+  data: T;
+};
+export type responseProps<T> = {
+  message: string;
+  name: string;
+  code: string;
+  status: string;
+  response: T;
 };
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -33,8 +40,8 @@ export default function Login() {
         password: userInfo.password,
       })
       .then(async (response) => {
-        const res: responseProps = response.data;
-        const data: dataProps = res.data;
+        const res: dataProps<userProps> = response.data;
+        const data: userProps = res.data;
         toast.success("Login Successfully!");
         sessionStorage.setItem("userName", JSON.stringify(data.fullName));
         sessionStorage.setItem("userToken", JSON.stringify(data.token));
@@ -42,8 +49,13 @@ export default function Login() {
         navigate("/accounts");
         setUserInfo({ email: "", password: "" });
       })
-      .catch((error) => {
-        const data: responseProps = error.response.data;
+      .catch((error: responseProps<{ data: dataProps<userProps> }>) => {
+        if (!error.response) {
+          toast.error(error.message);
+          setLoading(false);
+          return;
+        }
+        const data: dataProps<userProps> = error.response.data;
         toast.error(data.message);
         setLoading(false);
         setUserInfo({ ...userInfo, password: "" });

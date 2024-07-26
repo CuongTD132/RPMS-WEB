@@ -2,23 +2,26 @@ import { useEffect, useRef } from "react";
 import { toast } from "react-hot-toast";
 import Modal, { ModalHandle } from "../UI/Modal";
 import Button from "../UI/Button";
+import axios from "axios";
+import { SERVER_URI } from "../../utils/uri";
 
 type StatusChangeProps = {
   onClose: () => void;
   status: string;
-  firstName: string;
-  lastName: string;
+  id: string;
+  email: string;
 };
 export default function StatusChange({
-  firstName,
-  lastName,
+  email,
+  id,
   status,
   onClose,
 }: StatusChangeProps) {
   const modal = useRef<ModalHandle>(null);
+  const accessToken: string = JSON.parse(sessionStorage.getItem("userToken")!);
   const success = () =>
     toast.success(
-      `Status of ${firstName} ${lastName} has been updated to ${
+      `Status of account ${email} has been updated to ${
         status === "Active" ? "Inactive" : "Active"
       }`
     );
@@ -30,6 +33,17 @@ export default function StatusChange({
 
   function handleSubmit(event: React.SyntheticEvent<HTMLButtonElement>) {
     event.preventDefault();
+    console.log(status === "Active" ? "Inactive" : "Active");
+    axios.patch(
+      `${SERVER_URI}/accounts/${id}`,
+      status === "Active" ? "Inactive" : "Active",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
     success();
     onClose();
   }
@@ -38,9 +52,7 @@ export default function StatusChange({
       <div className="px-5 py-4">
         <h1 className="flex text-3xl mb-5 pb-2 border-b">
           Update status of&nbsp;
-          <p className="text-yellow-500">
-            {firstName} {lastName}
-          </p>
+          <p className="text-yellow-500">{email}</p>
         </h1>
         <h1 className="flex text-xl">
           <p className=" text-yellow-300">{status}</p>

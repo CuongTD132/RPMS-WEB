@@ -5,7 +5,7 @@ import Login from "./pages/Login.tsx";
 import Accounts from "./pages/accounts/Accounts.tsx";
 import Departments from "./pages/Departments.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import Account from "./pages/accounts/Account.tsx";
+import Account from "./pages/accounts/AccountInfo.tsx";
 import { Toaster } from "react-hot-toast";
 import { Counter } from "./pages/Counter.tsx";
 
